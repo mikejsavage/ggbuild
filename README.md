@@ -8,9 +8,10 @@ To use lfs do `local lfs = require( "INTERNAL_LFS" )`
 ggbuild itself is compiled with zig, cross-compiled from Windows to the
 other platforms.
 
-Lua sources have been modified to load lfs. Ninja sources have been
-modified to build on macOS without a getopt dependency. Changes have
-been marked with `// GGBUILD`.
+Lua sources have been modified to load lfs and add a variable `os.name`
+which is set to `"Windows"`/`"macOS"`/`"Linux"`. Ninja sources have been modified to
+build on macOS without a getopt dependency. Changes have been marked
+with `// GGBUILD`.
 
 ducible.exe is from https://github.com/jasonwhite/ducible/releases
 

@@ -425,6 +425,12 @@ static const luaL_Reg syslib[] = {
 
 LUAMOD_API int luaopen_os (lua_State *L) {
   luaL_newlib(L, syslib);
+
+  // GGBUILD
+  lua_pushliteral(L, LUA_OS_NAME);
+  lua_setfield(L, -2, "name");
+  // GGBUILD
+
   return 1;
 }
 

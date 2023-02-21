@@ -13,15 +13,22 @@ pub fn build(b: *std.build.Builder) !void {
     const mode = b.standardReleaseOptions();
 
     var exe_suffix : []const u8 = "";
+    var lua_os_name : []const u8 = "-DLUA_OS_NAME=\"Windows\"";
     if (target.isDarwin()) {
         exe_suffix = if (target.getCpuArch().isX86()) ".macos.x64" else ".macos.arm64";
+        lua_os_name = "-DLUA_OS_NAME=\"macOS\"";
     }
     else if (target.isLinux()) {
         exe_suffix = ".linux";
+        lua_os_name = "-DLUA_OS_NAME=\"Linux\"";
     }
 
+    const lua_cflags : []const []const u8 = &.{
+        lua_os_name,
+        if (!target.isWindows()) "-DLUA_USE_POSIX" else "",
+    };
+
     const lua = b.addExecutable(try std.fmt.allocPrint(a, "lua{s}", .{ exe_suffix }), null);
-    const lua_cflags : []const []const u8 = if (target.isWindows()) &.{} else &.{ "-DLUA_USE_POSIX" };
     lua.setTarget(target);
     lua.setBuildMode(mode);
     lua.install();
