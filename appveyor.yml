@@ -15,3 +15,9 @@ build_script:
 artifacts:
 - path: zig-out/bin
   name: ggbuild
+
+deploy:
+  description: "ggbuild"
+  provider: GitHub
+  auth_token:
+    secure: VunIVGfRztyUiEq+eFcnSmKMme04aiVoQfu9a533fRUKjW+CpAwSKySjc97onssr
