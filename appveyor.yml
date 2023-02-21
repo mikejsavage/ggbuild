@@ -4,7 +4,7 @@ image:
 - Visual Studio 2022
 
 build_script:
-- cmd: curl.exe https://ziglang.org/download/0.10.1/zig-windows-x86_64-0.10.1.zip -O zig.zip
+- cmd: curl.exe https://ziglang.org/download/0.10.1/zig-windows-x86_64-0.10.1.zip --output zig.zip
 - cmd: tar.exe xf zig.zip
 - cmd: zig-windows-x86_64-0.10.1\zig.exe build -Drelease-fast -Dtarget=x86_64-windows-msvc
 - cmd: zig-windows-x86_64-0.10.1\zig.exe build -Drelease-fast -Dtarget=x86_64-macos
