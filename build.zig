@@ -14,7 +14,7 @@ pub fn build(b: *std.build.Builder) !void {
 
     var exe_suffix : []const u8 = "";
     if (target.isDarwin()) {
-        exe_suffix = ".macos";
+        exe_suffix = if (target.getCpuArch().isX86()) ".macos.x64" else ".macos.arm64";
     }
     else if (target.isLinux()) {
         exe_suffix = ".linux";

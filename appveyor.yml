@@ -9,11 +9,15 @@ build_script:
 - cmd: zig-windows-x86_64-0.10.1\zig.exe build -Drelease-fast -Dtarget=x86_64-windows-msvc
 - cmd: zig-windows-x86_64-0.10.1\zig.exe build -Drelease-fast -Dtarget=x86_64-macos
 - cmd: zig-windows-x86_64-0.10.1\zig.exe build -Drelease-fast -Dtarget=x86_64-linux-musl
-- cmd: ducible.exe zig-out\bin\lua.exe
-- cmd: ducible.exe zig-out\bin\ninja.exe
+- cmd: .\ducible.exe zig-out\bin\lua.exe
+- cmd: .\ducible.exe zig-out\bin\ninja.exe
+- cmd: .\lipo.exe zig-out\bin\ninja.exe
+- cmd: .\lipo.exe zig-out\bin\lua.macos.amd64 zig-out\bin\lua.macos.x64 -create -output zig-out\bin\lua.macos
+- cmd: mkdir package
+- cmd: robocopy.exe zig-out\bin package *.exe *.macos *.linux
 
 artifacts:
-- path: zig-out/bin
+- path: package
   name: ggbuild
 
 deploy:

@@ -10,4 +10,5 @@ fi
 
 "$zig/zig.exe" build -Drelease-fast -Dtarget=x86_64-windows-msvc
 "$zig/zig.exe" build -Drelease-fast -Dtarget=x86_64-macos
+"$zig/zig.exe" build -Drelease-fast -Dtarget=aarch64-macos
 "$zig/zig.exe" build -Drelease-fast -Dtarget=x86_64-linux-musl
