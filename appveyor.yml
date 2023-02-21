@@ -11,3 +11,7 @@ build_script:
 - cmd: zig-windows-x86_64-0.10.1\zig.exe build -Drelease-fast -Dtarget=x86_64-linux-musl
 - cmd: ducible.exe zig-out\bin\lua.exe
 - cmd: ducible.exe zig-out\bin\ninja.exe
+
+artifacts:
+- path: zig-out/bin
+  name: ggbuild
