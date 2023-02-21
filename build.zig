@@ -21,6 +21,7 @@ pub fn build(b: *std.build.Builder) !void {
     }
 
     const lua = b.addExecutable(try std.fmt.allocPrint(a, "lua{s}", .{ exe_suffix }), null);
+    const lua_cflags : []const []const u8 = if (target.isWindows()) &.{} else &.{ "-DLUA_USE_POSIX" };
     lua.setTarget(target);
     lua.setBuildMode(mode);
     lua.install();
@@ -63,7 +64,7 @@ pub fn build(b: *std.build.Builder) !void {
         "lua-5.4.4/src/lzio.c",
 
         "luafilesystem-1_8_0/src/lfs.c",
-    }, &.{});
+    }, lua_cflags);
 
     const ninja = b.addExecutable(try std.fmt.allocPrint(a, "ninja{s}", .{ exe_suffix }), null);
     ninja.setTarget(target);
