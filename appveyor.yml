@@ -15,7 +15,10 @@ build_script:
 - cmd: .\lipo.exe zig-out\bin\lua.macos.arm64 zig-out\bin\lua.macos.x64 -create -output zig-out\bin\lua.macos
 - cmd: .\lipo.exe zig-out\bin\ninja.macos.arm64 zig-out\bin\ninja.macos.x64 -create -output zig-out\bin\ninja.macos
 - cmd: mkdir package
-- cmd: robocopy.exe zig-out\bin package *.exe *.macos *.linux
+# apparently you can't just copy like on linux. robocopy has funny exit statuses and copy likes to concat files
+- cmd: copy zig-out\bin\*.exe package
+- cmd: copy zig-out\bin\*.macos package
+- cmd: copy zig-out\bin\*.linux package
 
 artifacts:
 - path: package
