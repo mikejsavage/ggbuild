@@ -28,4 +28,4 @@ deploy:
   description: "ggbuild"
   provider: GitHub
   auth_token:
-    secure: VunIVGfRztyUiEq+eFcnSmKMme04aiVoQfu9a533fRUKjW+CpAwSKySjc97onssr
+    secure: j47A74mJ+WulLmHT0HFmYkPDkxRRGwfyiMrxN7Zva7k7NG2TXpt5DvcR+UB/wGiFgImRRFTc1AoTfccFzkPiXLjrA+jodh77P0KXnotNhypk7ApLvmykKkbodfQgwopq
