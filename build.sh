@@ -1,6 +1,6 @@
 #! /bin/sh
 
-zig_version="0.10.1"
+zig_version="0.15.2"
 zig="zig-windows-x86_64-$zig_version"
 
 if [ ! -e "$zig/zig.exe" ]; then
