@@ -4,12 +4,12 @@ image:
 - Visual Studio 2022
 
 build_script:
-- cmd: curl.exe https://ziglang.org/download/0.10.1/zig-windows-x86_64-0.10.1.zip --output zig.zip
+- cmd: curl.exe https://ziglang.org/download/0.15.2/zig-x86_64-windows-0.15.2.zip --output zig.zip
 - cmd: tar.exe xf zig.zip
-- cmd: zig-windows-x86_64-0.10.1\zig.exe build -Drelease-fast -Dtarget=x86_64-windows-msvc
-- cmd: zig-windows-x86_64-0.10.1\zig.exe build -Drelease-fast -Dtarget=aarch64-macos
-- cmd: zig-windows-x86_64-0.10.1\zig.exe build -Drelease-fast -Dtarget=x86_64-macos
-- cmd: zig-windows-x86_64-0.10.1\zig.exe build -Drelease-fast -Dtarget=x86_64-linux-musl
+- cmd: zig-x86_64-windows-0.15.2\zig.exe build -Doptimize=ReleaseFast -Dtarget=x86_64-windows-msvc
+- cmd: zig-x86_64-windows-0.15.2\zig.exe build -Doptimize=ReleaseFast -Dtarget=aarch64-macos
+- cmd: zig-x86_64-windows-0.15.2\zig.exe build -Doptimize=ReleaseFast -Dtarget=x86_64-macos
+- cmd: zig-x86_64-windows-0.15.2\zig.exe build -Doptimize=ReleaseFast -Dtarget=x86_64-linux-musl
 - cmd: .\ducible.exe zig-out\bin\lua.exe
 - cmd: .\ducible.exe zig-out\bin\ninja.exe
 - cmd: .\lipo.exe zig-out\bin\lua.macos.arm64 zig-out\bin\lua.macos.x64 -create -output zig-out\bin\lua.macos

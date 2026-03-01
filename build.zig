@@ -31,14 +31,11 @@ pub fn build(b: *std.Build) !void {
         if (!windows) "-DLUA_USE_POSIX" else "",
     };
 
-    const lua = b.addExecutable(.{
-        .name = try std.fmt.allocPrint(a, "lua{s}", .{ exe_suffix }),
+    const lua = b.createModule(.{
         .target = target,
         .optimize = optimize,
-        .strip = !windows,
+        .strip = true,
     });
-    b.installArtifact(lua);
-    lua.linkLibC();
     lua.addIncludePath(b.path("lua-5.4.4/src"));
     lua.addCSourceFiles(.{
         .files = &.{
@@ -81,17 +78,18 @@ pub fn build(b: *std.Build) !void {
         .flags = lua_cflags,
     });
 
-    const ninja = b.addExecutable(.{
-        .name = try std.fmt.allocPrint(a, "ninja{s}", .{ exe_suffix }),
+    const lua_exe = b.addExecutable(.{
+        .name = try std.fmt.allocPrint(a, "lua{s}", .{ exe_suffix }),
+        .root_module = lua,
+    });
+    lua_exe.linkLibC();
+    b.installArtifact(lua_exe);
+
+    const ninja = b.createModule(.{
         .target = target,
         .optimize = optimize,
-        .strip = !windows,
+        .strip = true,
     });
-    b.installArtifact(ninja);
-    ninja.linkLibC();
-    if (!windows) {
-        ninja.linkLibCpp();
-    }
     ninja.addCSourceFiles(.{
         .files = &.{
             "ninja-1.13.2/src/build.cc",
@@ -149,4 +147,14 @@ pub fn build(b: *std.Build) !void {
             },
         });
     }
+
+    const ninja_exe = b.addExecutable(.{
+        .name = try std.fmt.allocPrint(a, "ninja{s}", .{ exe_suffix }),
+        .root_module = ninja,
+    });
+    ninja_exe.linkLibC();
+    if (!windows) {
+        ninja_exe.linkLibCpp();
+    }
+    b.installArtifact(ninja_exe);
 }
